@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Formlario a Excel</title>
+</head>
+<body>
+<!--Formulario simple con dos campos de texto-->
+<form id="MiFormulario">
+<label for="nombre">Nombre:</label>
+<!--placeholder es para lo que se vera en el cuadro-->
+<input type="text" id="nombre" placeholder="Escribe tu nombre"><br><br>
+<label for="correo">Correo:</label>
+<input type="email" id="correo" placeholder="Escribe tu correo"><br><br>
+<label for="telefono">Telefono:</label>
+<input type="text" id="telefono" placeholder="Escribe tu telefono"><br><br>
+<label for="direccion">Dirección:</label>
+<input type="text" id="direccion" placeholder="Escribe tu dirección">
+<!--para guardar e excel-->
+<button type="button" onclick="guardarExcel()">Guardar en Excel</button>
+</form>
+<script>
+function guardarExcel(){
+let nombre=document.getElementById("nombre").value;
+let correo=document.getElementById("correo").value;
+let telefono=document.getElementById("telefono").value;
+let direccion=document.getElementById("direccion").value;
+<!--las coms son para separar los datos-->
+let contenido= "Nombre,Correo\n,telefono,direccion"+ nombre + "," + correo; + "," + telefono + "," + direccion;
+let blob = new Blob([contenido], {type: "text/csv"});
+
+let link = document.createElement("a");
+link.href = URL.createObjectURL(blob);
+link.download = "datos.csv";
+link.click();
+
+console.log("Archivo CSV generado y descargado.");
+}
+</script>
+</body>
+</html>
+
